@@ -48,6 +48,7 @@
       margin: 8px 0;
       border-radius: 5px;
       max-width: 70%;
+      margin-left: auto; /* Move user messages to the right */
     }
 
     .bot-message {
@@ -87,7 +88,7 @@
     }
 
     .dots::after {
-      content: '.';
+      content: '.'; 
       animation: dot 1s infinite steps(1);
     }
 
@@ -121,15 +122,20 @@
 
     sendButton.addEventListener('click', () => {
       const message = userInput.value.trim();
-
       if (message) {
         displayMessage(message, 'user');
         showLoading(); // Show loading indicator while waiting for the response
         conversationHistory.push({ role: 'user', content: message });
         getSarcasticResponse(message);
       }
-
       userInput.value = '';
+    });
+
+    userInput.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' && !event.shiftKey) {  // If Enter is pressed (without Shift for line break)
+        event.preventDefault();
+        sendButton.click();  // Simulate clicking the send button
+      }
     });
 
     async function getSarcasticResponse(message) {
@@ -195,9 +201,8 @@
         loadingElement.remove();
       }
     }
-
-    
   </script>
+
   <script>
     document.addEventListener('keydown', function(event) {
       // Disable Ctrl+U (view source)
@@ -218,6 +223,5 @@
       }
     });
   </script>
-  
 </body>
 </html>
