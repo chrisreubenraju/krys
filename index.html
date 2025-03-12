@@ -146,7 +146,7 @@
 
       // Include the entire conversation history to maintain context
       const body = JSON.stringify({
-        model: 'mistralai/mistral-small-24b-instruct-2501:free', 
+        model: 'google/gemma-3-27b-it:free', 
         messages: conversationHistory.concat([{
           role: 'user',
           content: `Respond sarcastically to this like the user is talking to you (a girl), in two lines: "${message}"`
